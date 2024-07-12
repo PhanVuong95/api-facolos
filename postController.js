@@ -17,12 +17,10 @@ const createPost = async (req, res) => {
   } catch (error) {
     if (error.code === 11000) {
       // Mã lỗi cho trùng lặp
-      res
-        .status(400)
-        .json({
-          message:
-            "Email hoặc số điện thoại đã tồn tại. Vui lòng kiểm tra lại!",
-        });
+      res.status(400).json({
+        message: "Email hoặc số điện thoại đã tồn tại. Vui lòng kiểm tra lại!",
+        status: 400,
+      });
     } else {
       res.status(400).json({ message: "Có lỗi xảy ra." });
     }
