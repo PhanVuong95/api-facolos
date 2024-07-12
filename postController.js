@@ -12,10 +12,20 @@ const listPost = async (req, res) => {
 
 const createPost = async (req, res) => {
   try {
-    const post = await Post(req.body).save();
+    const post = await new Post(req.body).save();
     res.status(200).json({ message: "Lưu thành công!", post });
   } catch (error) {
-    res.status(400).json({ message: "Không thấy data" });
+    if (error.code === 11000) {
+      // Mã lỗi cho trùng lặp
+      res
+        .status(400)
+        .json({
+          message:
+            "Email hoặc số điện thoại đã tồn tại. Vui lòng kiểm tra lại!",
+        });
+    } else {
+      res.status(400).json({ message: "Có lỗi xảy ra." });
+    }
   }
 };
 
