@@ -9,12 +9,12 @@ const PostSchema = mongoose.Schema(
     phone: {
       type: String,
       required: true,
-      unique: true,
+      // unique: true,
     },
     email: {
       type: String,
       required: false,
-      unique: true,
+      // unique: true,
     },
   },
   { timestamps: true }
